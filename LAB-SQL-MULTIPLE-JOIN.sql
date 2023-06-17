@@ -27,7 +27,7 @@ JOIN film F
 ON FC.film_id=F.film_id
 GROUP BY CATEGORY;
 
--- 4) Which film categories are longest?
+-- 4) Which film categories are longest? (MAL INTERPRETADA LA CONSIGNA)
 SELECT CA.name AS CATEGORY, ROUND(AVG(F.length),2) AS AVERAGE_TIME
 FROM category CA 
 JOIN film_category FC
@@ -36,6 +36,16 @@ JOIN film F
 ON FC.film_id=F.film_id
 GROUP BY CATEGORY
 ORDER BY AVERAGE_TIME DESC;
+
+-- 4) Which film categories are longest? (BIEN)
+SELECT CA.name AS CATEGORY, COUNT(f.film_id) AS Count_films
+FROM category CA 
+JOIN film_category FC
+ON CA.category_id= FC.category_id
+JOIN film F 
+ON FC.film_id=F.film_id
+GROUP BY CATEGORY
+ORDER BY Count_films DESC;
 
 -- 5) Display the most frequently rented movies in descending order.
 SELECT F.film_id, F.title, COUNT(R.rental_id) AS COUNT_RENTALS
